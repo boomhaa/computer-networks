@@ -162,9 +162,9 @@
 		\vspace{11em}
 		
 		\begin{center}
-			\Large {\bf Лабораторная работа № 4} \\
+			\Large {\bf Лабораторная работа № 5} \\
 			\large {\bf по курсу <<Компьютерные сети>>} \\
-			\large <<Proxy-server на go>>
+			\large <<Импорт новостей в базу данных из RSS-канала>>
 		\end{center}\normalsize
 		
 		\vspace{8em}
@@ -197,9 +197,8 @@
 	
 	\section{Задание}\label{Sect::task}
 	
-	Нужно разработать proxy-server на языке go для отображения сайтов
+Приложение должно подключаться к удаленной базе данных под управлением СУБД MySQL и выполнять обновление новостей в таблице. При этом важно учесть следующее: при повторном запуске приложения необходимо сравнивать новости в rss канале с теми, что записаны в таблице и при повторных запусках приложения дублей новостей в таблице быть не должно. Вывод обновления данных должен происходить асинхронно в html dashboard.
 	\section{Результаты}\label{Sect::res}
-	
 	Исходный код программы представлен в листингах~\ref{lst:code1}--~\ref{lst:code2}.
 	
 	\begin{lstlisting}[language={},caption={client.go},label={lst:code1}]
@@ -341,7 +340,7 @@
 		log.Fatal(http.ListenAndServe(":9786", nil))
 	}
 	\end{lstlisting}
-		\begin{lstlisting}[language={},caption={server.go},label={lst:code1}]
+		\begin{lstlisting}[language={},caption={server.go},label={lst:code2}]
 package main
 
 import (
