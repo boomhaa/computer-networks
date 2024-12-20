@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #4c5c96, #2b3467);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form.form-example {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        div.form-example {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        input:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .button-container {
+            width: 100%;
+            max-width: 400px;
+            margin-top: 10px;
+        }
+
+        #sendButton {
+            width: calc(100% - 20px);
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f05454;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 0 10px;
+        }
+
+        #sendButton:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+
+    <form action="" method="post" class="form-example">
+        <h1>Страница логинизации</h1>
+        <div class="form-example">
+            <label for="host">Enter your host: </label>
+            <input type="text" name="host" id="host" required />
+        </div>
+        <div class="form-example">
+            <label for="login">Enter your login: </label>
+            <input type="text" name="login" id="login" required />
+        </div>
+        <div class="form-example">
+            <label for="password">Enter your password: </label>
+            <input type="password" name="password" id="password" required />
+        </div>
+
+    </form>
+    <div class="button-container">
+        <button id="sendButton">Login</button>
+    </div>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+</html>

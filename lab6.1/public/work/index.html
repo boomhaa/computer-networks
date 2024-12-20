@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console</title>
+    <style>
+        body {
+            background: #1a1a1a;
+            color: #f0f0f0;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .need {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 18px;
+        }
+
+        input.text {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #333;
+            color: #f0f0f0;
+            font-size: 16px;
+        }
+
+        input.text:focus {
+            outline: none;
+            border-color: #66ccff;
+        }
+
+        button#commandButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007acc;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button#commandButton:hover {
+            background-color: #005fa3;
+        }
+
+        #data {
+            margin-top: 20px;
+            width: 80%;
+            max-width: 600px;
+            background-color: #252525;
+            padding: 15px;
+            border-radius: 5px;
+            overflow: auto;
+            max-height: 300px;
+            font-size: 14px;
+            color: #e6e6e6;
+        }
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+<h1>Консоль</h1>
+<div class="need">
+    <label for="command">Enter the command: </label>
+    <input type="text" name="command" id="command" class="text" required />
+</div>
+<button id="commandButton">Enter</button>
+<div id="data"></div>
+<script>
+    let cmdBtn = document.getElementById("commandButton");
+    cmdBtn.onclick = () => enter();
+
+    const socket = new WebSocket(`ws://${window.location.host}/ws`);
+
+    socket.onopen = function () {
+        console.log("WebSocket соединение установлено");
+    };
+
+    socket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        let div = document.getElementById("data");
+        div.innerHTML = `<pre>${data}</pre>`;
+    }
+
+    function enter() {
+        let cmd = document.getElementById("command");
+        fetch("/command", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ command: cmd.value})
+        }).then(response => {
+            if (!response.ok) {
+                alert("Bad command");
+            }
+            cmd.value = ""
+        }).catch(e => {
+            console.log("Ошибка: " + e);
+        });
+    }
+</script>
+</body>
+</html>
